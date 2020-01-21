@@ -10,9 +10,9 @@ import com.testing.helper.Helper;
 
 
 
-public class ShoeBrandPage extends PageObject {
+public class ShoesBrandsPage extends PageObject {
 
-	public ShoeBrandPage(RemoteWebDriver remoteWebDriver) {
+	public ShoesBrandsPage(RemoteWebDriver remoteWebDriver) {
 		super(remoteWebDriver);
 		
 	}
