@@ -1,0 +1,11 @@
+#Eclipse
+
+/.classpath
+/*.project
+/.settings
+/.metadata
+
+#Maven
+
+/target/
+/Log4j/

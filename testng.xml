@@ -1,0 +1,101 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="TestSuite" parallel="tests"  verbose="1" >
+	<listeners>
+		<listener class-name="com.testing.listeners.TestListener" />
+		 <!--<listener class-name="com.tenniswarehouse.jiraintegration.TestListener" />  -->
+	</listeners>
+	<parameter name="browserType" value="chrome" />
+	<parameter name="appURL" value="https://google.com" />
+
+
+<!-- 	<test name="Sanity">
+	
+		<groups>
+ 		<run>
+ 			<include name="sanity-test"></include>
+ 			<include name="functionallity"></include>
+ 		</run>
+ 		</groups>	
+	
+	
+	</test> -->
+
+
+
+	  <test name="ChromeTest" parallel="classes" thread-count="3"   >
+     <parameter name="browser" value="chrome"></parameter>
+     
+     
+     	     	
+     	 <classes >     	 
+     	 	<class name="com.testing.testpages.HomePageTest"> 	</class>
+     	 	<class name="com.testing.testpages.LoginPageTest"></class> 
+     	 	<class name="com.testing.testpages.ShoesPageTest"></class>
+     	 </classes>
+     	
+     </test> 
+         
+       <test name="FireFoxTest"  parallel="classes" thread-count="3" >
+     <parameter name="browser" value="firefox"></parameter>
+      
+     	 <classes>
+     	 	<class name="com.testing.testpages.HomePageTest"></class>
+     	 	<class name="com.testing.testpages.LoginPageTest"></class>
+     	 	<class name="com.testing.testpages.ShoesPageTest"></class>
+
+     	 </classes>
+     	    	 
+     </test>
+     
+        
+     
+     
+     
+     
+     
+     
+     
+
+   <!-- <test name="All tests">
+   		
+   		<packages>
+   			<package name="com.tenniswarehouse.testpages"></package>
+   		</packages>
+ 	</test>   -->
+ 	
+  		<!--<test name=" First test" >
+         <classes>
+             <class
+                 name="com.tenniswarehouse.testpages.HomePageTest">
+                 <methods>
+                     <include name="valdiateTitle" />
+                 </methods>
+             </class>
+         </classes>
+     </test>-->
+ 
+<!--  <test name="Sanity Test" >
+ 
+ 	<groups>
+ 		<run>
+ 			<include name="sanity-test"></include>
+ 			<include name="functionallity"></include>
+ 		</run>
+ 	</groups>
+ 	
+ 	<classes>
+ 		<class name="com.tenniswarehouse.testpages.HomePageTest"></class> 
+ 		<class name="com.tenniswarehouse.testpages.LoginPageTest"></class>
+ 	</classes>
+    
+ 	</test>     
+         -->
+
+
+
+  
+     
+     
+</suite>
+
