@@ -7,20 +7,22 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.testing.enums.Gender;
+import com.testing.framework.LocalDriverContext;
+import com.testing.framework.BasePage;
 import com.testing.helper.Helper;
 
 
 
-public class HomePageObject extends PageObject{
+public class HomePageObject extends BasePage{
 
 	//	  private WebDriverFacade webDriver;
 	//	  private WebElement element;
 
-	public HomePageObject(RemoteWebDriver webDriver)
-	{
-		super(webDriver);
-		
-	}
+//	public HomePageObject(RemoteWebDriver webDriver)
+//	{
+//		super(webDriver);
+//		
+//	}
 	
 
 	@FindBy(xpath = "//*[@id=\"searchtext\"]")
@@ -40,6 +42,12 @@ public class HomePageObject extends PageObject{
 	
 	@FindBy(xpath=	"//*[@class=\"lnav_columns cf\"]//div[2]//a")
 	List<WebElement> womenShoes;
+	
+	@FindBy(xpath="//*[@id=\"login\"]/a")
+	WebElement loginLink;
+	
+	@FindBy(xpath = "//*[@id=\"login_form\"]//h2")
+	WebElement loginFormTxt;
 	
 
 	public void SearchFor(String text)
@@ -65,11 +73,18 @@ public class HomePageObject extends PageObject{
 
 		return searchResultTxt.getText();
 	}
+	
+	public String ClickOnTheLoginLink() {
+		LocalDriverContext.click(loginLink);
+		return loginFormTxt.getText();
+			
+	}	
 
 
-	public void clickOnShoeElementByBrand(String shoeBrand, String gender) {
+	public ShoesBrandsPage clickOnShoeElementByBrand(String shoeBrand, String gender) {
 				
-		Helper.clickOnListElementEquals(getShoesListByGender(gender), shoeBrand);		
+		Helper.clickOnListElementEquals(getShoesListByGender(gender), shoeBrand);
+		return GetInstance(ShoesBrandsPage.class);		
 	}
 	
 	public List<WebElement> getShoesListByGender(String gender) {

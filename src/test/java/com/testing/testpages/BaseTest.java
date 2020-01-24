@@ -7,19 +7,18 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import com.testing.base.CapabilityFactory;
-import com.testing.base.LocalDriverContext;
 import com.testing.constants.Constants;
 import com.testing.emailreport.MailReport;
+import com.testing.framework.Base;
+import com.testing.framework.CapabilityFactory;
+import com.testing.framework.LocalDriverContext;
 
 
-
-
-
-public class BaseTest {
+public class BaseTest extends Base {
 	
 	
 	public CapabilityFactory capabilityFactory = new CapabilityFactory();
@@ -36,12 +35,11 @@ public class BaseTest {
 		
 		remoteWebDriver = new RemoteWebDriver(new URL(Constants.hubUrl), capabilityFactory.getCapabilities(browser));
 		LocalDriverContext.setWebDriver(remoteWebDriver);    
-        
-		
+        		
 		System.out.println(LocalDriverContext.getRemoteWebDriver().toString());
 		
 	}
-	
+
 	public RemoteWebDriver getDriver() {
         return LocalDriverContext.getRemoteWebDriver();
     }

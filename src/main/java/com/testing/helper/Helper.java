@@ -9,7 +9,7 @@ import java.util.Random;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.testing.base.LocalDriverContext;
+import com.testing.framework.LocalDriverContext;
 
 
 
@@ -20,8 +20,8 @@ public class Helper {
 		for(int i=0; i<list.size();i++) {
 			if(list.get(i).getText().equalsIgnoreCase(elementName)) {
 				
-				LocalDriverContext.ExecuteJavaScriptToScrollToAnElement(list.get(i));
-					list.get(i).click();
+				//LocalDriverContext.ExecuteJavaScriptToScrollToAnElement(list.get(i));
+				LocalDriverContext.click(list.get(i));
 				
 				break;
 			}				
@@ -32,11 +32,12 @@ public class Helper {
 			String elementName, String attribute) {
 		for(int i=0; i<list.size();i++) {
 			String element = list.get(i).getAttribute(attribute);
+			//String element = LocalDriverContext.getAttribute(list.get(i), attribute);
 			if(element.contains(elementName) || element.contains(elementName.toLowerCase())) {
 				
-				LocalDriverContext.ExecuteJavaScriptToScrollToAnElement(list.get(i));
-					list.get(i).click();
-								
+				//LocalDriverContext.ExecuteJavaScriptToScrollToAnElement(list.get(i));
+				LocalDriverContext.click(list.get(i));	
+				
 				break;
 			}		
 		}
@@ -107,15 +108,6 @@ public class Helper {
 		
 	}
 	
-	public  static void performClick(WebElement element) {
-		
-			element.click();
-		
-	}
-	
-	public static  void test() {
-		System.out.println("hel");
-	}
 	
 //	public static void extentReprotDataSupplier(String s) {
 //		

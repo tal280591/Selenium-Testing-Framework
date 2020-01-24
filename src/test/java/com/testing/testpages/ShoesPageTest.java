@@ -11,15 +11,16 @@ import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-
-import com.testing.base.LocalDriverContext;
 import com.testing.dataproviders.GenderDataProvider;
 import com.testing.dataproviders.ShoesDataProvider;
 import com.testing.enums.Gender;
 import com.testing.extentreports.ExtentTestManager;
+import com.testing.framework.Base;
+import com.testing.framework.LocalDriverContext;
 import com.testing.helper.Helper;
 import com.testing.pageobjects.HomePageObject;
-import com.testing.pageobjects.ShoeBrandPage;
+
+import com.testing.pageobjects.ShoesBrandsPage;
 import com.testing.pageobjects.ShoesPage;
 
 
@@ -28,25 +29,16 @@ public class ShoesPageTest extends BaseTest {
 	
 	private String landingUrl;
 	private ShoesPage shoesPage;
-	private HomePageObject homePage;
-	private ShoeBrandPage shoeBrandPage;
-
+	
 	public ShoesPageTest() {
 		landingUrl = "https://www.tennis-warehouse.com/";
 	}
 
-		
-	@BeforeClass
-	public void init() {
-		this.homePage = new HomePageObject(getDriver());
-		this.shoesPage = new ShoesPage(getDriver());
-		this.shoeBrandPage = new ShoeBrandPage(getDriver());
-		
-		
-	}
+
 	
 	@BeforeMethod
 	public void navigate() {
+		shoesPage = GetInstance(ShoesPage.class);
 		LocalDriverContext.navigate(landingUrl);
 		System.out.println(LocalDriverContext.getRemoteWebDriver().toString());
 	}
@@ -54,9 +46,9 @@ public class ShoesPageTest extends BaseTest {
 	@Test(dataProvider = "Gender", dataProviderClass = GenderDataProvider.class)
 	public void checkShoesGenderTitle(String gender ) {
 		
-		//HomePageObject homePage = new HomePageObject(webDriver);
-		String elementName = homePage.getShoesListByGender(gender).get(0).getText();
-		homePage.clickOnShoeElementByBrand(elementName, gender);
+		CurrentPage = GetInstance(HomePageObject.class);
+		String elementName = CurrentPage.As(HomePageObject.class).getShoesListByGender(gender).get(0).getText();
+		CurrentPage.As(HomePageObject.class).clickOnShoeElementByBrand(elementName, gender);
 		
 		ExtentTestManager.getTest().info(MarkupHelper.createLabel(gender, ExtentColor.BLUE));
 		String actualTitle = shoesPage.getPageTitle();
@@ -68,11 +60,10 @@ public class ShoesPageTest extends BaseTest {
 			throws MalformedURLException
 	{
 		
-		//HomePageObject homePage = new HomePageObject(webDriver);
-		homePage.clickOnShoeElementByBrand(Gender.MALE.getGender(), Gender.MALE.getGender());
+		CurrentPage = GetInstance(HomePageObject.class);
+		CurrentPage = CurrentPage.As(HomePageObject.class).clickOnShoeElementByBrand(Gender.MALE.getGender(), Gender.MALE.getGender());
 		shoesPage.clickOnShoeBrand(shoeBrand, "alt");
-		//String urlAfterBrandClicked = Helper.getUrl(webDriver);
-		String actualBrandPage = shoeBrandPage.getPageTitle();
+		String actualBrandPage = CurrentPage.As(ShoesBrandsPage.class).getPageTitle();
 		assertTrue(Helper.containsValue(shoeBrand, actualBrandPage));
 	}
 }

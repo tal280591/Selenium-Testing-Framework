@@ -6,16 +6,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import com.testing.framework.BasePage;
+import com.testing.framework.LocalDriverContext;
 import com.testing.helper.Helper;
 
 
 
-public class ShoesBrandsPage extends PageObject {
+public class ShoesBrandsPage extends BasePage {
 
-	public ShoesBrandsPage(RemoteWebDriver remoteWebDriver) {
-		super(remoteWebDriver);
-		
-	}
+//	public ShoesBrandsPage(RemoteWebDriver remoteWebDriver) {
+//		super(remoteWebDriver);
+//		
+//	}
 	@FindBy(xpath = "//h1[starts-with(@id,'MS')][1]")
 	WebElement pageTitle;
 	
@@ -41,7 +43,7 @@ public class ShoesBrandsPage extends PageObject {
 		Helper.clickOnRandomElement(shoesElements);
 	}
 	public String getPageTitle() {
-		return pageTitle.getText();
+		return LocalDriverContext.getTxt(pageTitle);
 	}
 	
 	

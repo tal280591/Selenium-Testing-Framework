@@ -5,31 +5,20 @@
 		<listener class-name="com.testing.listeners.TestListener" />
 		 <!--<listener class-name="com.tenniswarehouse.jiraintegration.TestListener" />  -->
 	</listeners>
-	<parameter name="browserType" value="chrome" />
-	<parameter name="appURL" value="https://google.com" />
-
-
-<!-- 	<test name="Sanity">
 	
-		<groups>
- 		<run>
- 			<include name="sanity-test"></include>
- 			<include name="functionallity"></include>
- 		</run>
- 		</groups>	
+	<!-- <parameter name="browserType" value="chrome" />
+	<parameter name="appURL" value="https://google.com" /> -->
 	
-	
-	</test> -->
+	<parameter name="go-to-login-param" value="Returning Customer Login"></parameter>  
 
 
-
-	  <test name="ChromeTest" parallel="classes" thread-count="3"   >
-     <parameter name="browser" value="chrome"></parameter>
-     
-     
-     	     	
-     	 <classes >     	 
-     	 	<class name="com.testing.testpages.HomePageTest"> 	</class>
+	  <test name="ChromeTest" parallel="classes" thread-count="3">
+	  
+     <parameter name="browser" value="chrome"></parameter>    
+     	
+     	 <classes> 
+     	 	    	 
+     	 	<class name="com.testing.testpages.HomePageTest"></class> 	
      	 	<class name="com.testing.testpages.LoginPageTest"></class> 
      	 	<class name="com.testing.testpages.ShoesPageTest"></class>
      	 </classes>

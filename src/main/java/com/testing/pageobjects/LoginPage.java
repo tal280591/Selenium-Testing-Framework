@@ -5,15 +5,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import com.testing.base.LocalDriverContext;
+import com.testing.framework.LocalDriverContext;
+import com.testing.framework.BasePage;
 
 
 
-public class LoginPage extends PageObject {
+public class LoginPage extends BasePage {
 
-	public LoginPage(RemoteWebDriver webDriver) {
-		super(webDriver);		
-	}
+//	public LoginPage(RemoteWebDriver webDriver) {
+//		super(webDriver);		
+//	}
 	private final String loginPageUrl = "https://www.tennis-warehouse.com/loginaccount.html";
 	
 	public String getLoginPageUrl() {
@@ -33,6 +34,7 @@ public class LoginPage extends PageObject {
 	
 	@FindBy(xpath = "//*[@id=\"login\"]/form/a")
 	WebElement accountLink;
+	
 	
 	
 	public void ClickOnTheLoginLink() {

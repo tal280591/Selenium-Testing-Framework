@@ -9,14 +9,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.testing.base.LocalDriverContext;
 import com.testing.dataproviders.ShoesDataProvider;
 import com.testing.enums.BaseSortBy;
 import com.testing.enums.Gender;
 import com.testing.extentreports.ExtentTestManager;
+import com.testing.framework.Base;
+import com.testing.framework.LocalDriverContext;
 import com.testing.helper.Helper;
 import com.testing.pageobjects.HomePageObject;
-import com.testing.pageobjects.ShoeBrandPage;
+
+import com.testing.pageobjects.ShoesBrandsPage;
 
 
 
@@ -40,21 +42,24 @@ public class HomePageTest extends BaseTest
 	
 	@BeforeMethod(alwaysRun = true)
 	public void navigateToHomePage() {
-		homePage = new HomePageObject(getDriver());
+//		homePage = new HomePageObject(getDriver());
+		//CurrentPage = GetInstance(HomePageObject.class);
+		homePage = GetInstance(HomePageObject.class);
 		LocalDriverContext.navigate(landingUrl);
 	}
 	
 	
-	@Test(groups = "sanity-test", priority = 0)
+	@Test(priority = 0)
 	public void valdiateTitle() {
 						
 		String expectedTitle = "Tennis Warehouse";
+		//CurrentPage = GetInstance(HomePageObject.class);		
 		String homePageTitle = homePage.GetPageTitle();
 		
 		assertEquals(homePageTitle, expectedTitle);
 	}
 	
-	@Test(groups = "sanity-test", priority = 0)
+	@Test(priority = 0)
 	public void validateSearchBox() {
 
 		String expectedSearchResult = "Search Results for \"wilson pro staff\"";						
@@ -66,8 +71,8 @@ public class HomePageTest extends BaseTest
 	}
 	
 	
-	@Test(groups = "functionallity",dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class,
-			dependsOnGroups = "sanity-test", successPercentage = 20, priority = 0)
+	@Test(dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class,
+			priority = 0)
 	public void clickOnShoesBrandLinkForMen(String shoeBrand, String expectedUrl) 
 			throws MalformedURLException {
 		
@@ -92,10 +97,11 @@ public class HomePageTest extends BaseTest
 			priority = 1)
 	public void filteredShoesBySortType(String shoeBrand, String s) {
 		
-		homePage.clickOnShoeElementByBrand(shoeBrand, Gender.MALE.getGender());				
-		ShoeBrandPage shoesPage = new ShoeBrandPage(getDriver());
-		shoesPage.ClickOnSortByOption(BaseSortBy.NEW.getAction());
-		boolean isFiltered = shoesPage.validatesFilteredCorrectly(BaseSortBy.NEW.getAction());
+		
+		CurrentPage = homePage.clickOnShoeElementByBrand(shoeBrand, Gender.MALE.getGender());			
+		CurrentPage.As(ShoesBrandsPage.class).ClickOnSortByOption(BaseSortBy.NEW.getAction());
+		 
+		boolean isFiltered = CurrentPage.As(ShoesBrandsPage.class).validatesFilteredCorrectly(BaseSortBy.NEW.getAction());
 		String[][] data = {
 				{"Brand", "Filtered By Method"},
 				{shoeBrand, BaseSortBy.NEW.getAction()}				
@@ -113,9 +119,9 @@ public class HomePageTest extends BaseTest
 		dependsOnMethods = "filteredShoesBySortType", priority = 1)
 	public void addShoeToBasket(String shoeBrand, String s) {
 		
-		ShoeBrandPage shoesPage = new ShoeBrandPage(getDriver());
-		homePage.clickOnShoeElementByBrand(shoeBrand, Gender.MALE.getGender());
-		shoesPage.ClickOnRandomShoeElement(); 
+		//ShoesBrandsPage shoesPage = new ShoesBrandsPage(getDriver());
+		 CurrentPage = homePage.clickOnShoeElementByBrand(shoeBrand, Gender.MALE.getGender());
+		 CurrentPage.As(ShoesBrandsPage.class).ClickOnRandomShoeElement(); 
 		
 		
 	}
