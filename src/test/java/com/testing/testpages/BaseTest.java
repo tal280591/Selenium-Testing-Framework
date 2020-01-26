@@ -13,7 +13,7 @@ import org.testng.annotations.Parameters;
 
 import com.testing.constants.Constants;
 import com.testing.emailreport.MailReport;
-import com.testing.framework.Base;
+
 import com.testing.framework.CapabilityFactory;
 import com.testing.framework.LocalDriverContext;
 
@@ -21,28 +21,30 @@ import com.testing.framework.LocalDriverContext;
 public class BaseTest extends Base {
 	
 	
-	public CapabilityFactory capabilityFactory = new CapabilityFactory();
-	public RemoteWebDriver remoteWebDriver;
+//	public CapabilityFactory capabilityFactory = new CapabilityFactory();
+//	public RemoteWebDriver remoteWebDriver;
 	
 	@BeforeSuite(alwaysRun = true)
 	public void Init() throws MalformedURLException {
 		//hubUrl = new URL("http://localhost:4444/wd/hub");		
 	}
 	
-	@BeforeClass(alwaysRun = true)
+//	@BeforeClass(alwaysRun = true)
+//	@Parameters("browser")
+	@Override
 	@Parameters("browser")
+	@BeforeClass(alwaysRun = true)
 	public void setup(ITestContext context,String browser) throws MalformedURLException {
 		
 		remoteWebDriver = new RemoteWebDriver(new URL(Constants.hubUrl), capabilityFactory.getCapabilities(browser));
-		LocalDriverContext.setWebDriver(remoteWebDriver);    
-        		
+		LocalDriverContext.setWebDriver(remoteWebDriver);            		
 		System.out.println(LocalDriverContext.getRemoteWebDriver().toString());
 		
 	}
 
-	public RemoteWebDriver getDriver() {
-        return LocalDriverContext.getRemoteWebDriver();
-    }
+//	public RemoteWebDriver getDriver() {
+//        return LocalDriverContext.getRemoteWebDriver();
+//    }
 	
 //	@AfterMethod(alwaysRun = true)
 //	public void teardown() {
@@ -53,11 +55,14 @@ public class BaseTest extends Base {
 //	public void teardown() {
 //		getDriver().quit();
 //	}
-	@AfterSuite(alwaysRun = true)
-	public void afterSuite() {
-		MailReport.createMail();
-		
-	}
+//	@AfterSuite(alwaysRun = true)
+//	public void afterSuite() {
+//		MailReport.createMail();
+//		
+//	}
+
+
+
 	
 	
 	
