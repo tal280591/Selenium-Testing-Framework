@@ -5,7 +5,9 @@ import java.net.URL;
 
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -51,13 +53,13 @@ public class BaseTest extends Base {
 //		getDriver().quit();
 //	}
  
-//	@AfterClass(alwaysRun = true)
+//	@AfterTest(alwaysRun = true)
 //	public void teardown() {
-//		getDriver().quit();
+//		LocalDriverContext.stop();
 //	}
 //	@AfterSuite(alwaysRun = true)
 //	public void afterSuite() {
-//		MailReport.createMail();
+//		getDriver().quit();
 //		
 //	}
 
@@ -71,10 +73,10 @@ public class BaseTest extends Base {
 //        getDriver().quit();
 //    }
  
-//    @AfterClass void terminate () {
-//        //Remove the ThreadLocalMap element
-//    	LocalDriverContext.getRemoteWebDriver().stop();
-//    }
+    @AfterClass void terminate () {
+        //Remove the ThreadLocalMap element
+    	getDriver().quit();
+    }
     
 
 //	@AfterTest
