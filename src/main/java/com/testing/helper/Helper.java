@@ -93,11 +93,13 @@ public class Helper {
 		return LocalDriverContext.getCurrentUrl();
 	}
 	
-	public  static void clickOnRandomElement(List<WebElement> list) {
+	public  static String clickOnRandomElement(List<WebElement> list) {
 		
 		Random rand = new Random();
 		int randomSelect = rand.nextInt(list.size());
-		clickOnListElementEquals(list, list.get(randomSelect).getText());
+		String element = list.get(randomSelect).getText();
+		clickOnListElementEquals(list, element);
+		return element;
 	}
 	
 	public  static boolean containsValue(String containedString, String containsString) {

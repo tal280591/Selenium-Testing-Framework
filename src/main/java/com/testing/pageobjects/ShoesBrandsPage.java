@@ -38,9 +38,9 @@ public class ShoesBrandsPage extends BasePage {
 	public boolean validatesFilteredCorrectly(String sortBy) {
 		return Helper.checkFilteredPage(productTagList, sortBy);
 	}
-	public void ClickOnRandomShoeElement() {
+	public String ClickOnRandomShoeElement() {
 
-		Helper.clickOnRandomElement(shoesElements);
+		 return Helper.clickOnRandomElement(shoesElements);
 	}
 	public String getPageTitle() {
 		return LocalDriverContext.getTxt(pageTitle);

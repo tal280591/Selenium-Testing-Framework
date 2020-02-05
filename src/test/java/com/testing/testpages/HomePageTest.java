@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.testing.dataproviders.ShoesDataProvider;
 import com.testing.enums.BaseSortBy;
@@ -92,9 +93,9 @@ public class HomePageTest extends BaseTest
 	
 	
 	@Test(dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class,
-			dependsOnMethods = "clickOnShoesBrandLinkForMen", 
-			description = "At specific brand shoes page, filter acording to the provided sort method",
-			priority = 1)
+//			dependsOnMethods = "clickOnShoesBrandLinkForMen", 
+			description = "At specific brand shoes page, filter acording to the provided sort method")
+//			priority = 1)
 	public void filteredShoesBySortType(String shoeBrand, String s) {
 		
 		
@@ -115,14 +116,13 @@ public class HomePageTest extends BaseTest
 		
 	}
 	
-	@Test(dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class,
-		dependsOnMethods = "filteredShoesBySortType", priority = 1)
+	@Test(dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class)
 	public void addShoeToBasket(String shoeBrand, String s) {
 		
 		//ShoesBrandsPage shoesPage = new ShoesBrandsPage(getDriver());
 		 CurrentPage = homePage.clickOnShoeElementByBrand(shoeBrand, Gender.MALE.getGender());
-		 CurrentPage.As(ShoesBrandsPage.class).ClickOnRandomShoeElement(); 
-		
+		 String element = CurrentPage.As(ShoesBrandsPage.class).ClickOnRandomShoeElement(); 
+		 ExtentTestManager.getTest().info(MarkupHelper.createLabel("shoe element name: " + element, ExtentColor.BLUE));
 		
 	}
 	
