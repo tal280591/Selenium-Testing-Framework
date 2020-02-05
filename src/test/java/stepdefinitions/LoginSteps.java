@@ -20,8 +20,11 @@ import cucumber.api.java.en.When;
 
 
 
-@Test
+
 public class LoginSteps extends BasePage {
+	
+		
+		
 	
 			
 	    @Given("^Initialized the browser$")
@@ -51,7 +54,6 @@ public class LoginSteps extends BasePage {
 			assertTrue(loggedin);
 	    }
 
-	    //@Parameters("broswer")
 	    @And("^Navigate to \"([^\"]*)\"$")
 	    public void navigate_to_something(String strArg1) throws Throwable {
 	    	LocalDriverContext.navigate(strArg1);

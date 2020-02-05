@@ -69,9 +69,9 @@ public class HomePageObject extends BasePage{
 		searchField.clear();
 	}
 
-	public String ValidateSearchPerformedAsExpected() {
-
-		return searchResultTxt.getText();
+	public boolean ValidateSearchPerformedAsExpected(String s) {
+		return Helper.containsValue(s, LocalDriverContext.getTxt(searchResultTxt));
+		
 	}
 	
 	public String ClickOnTheLoginLink() {

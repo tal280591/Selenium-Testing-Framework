@@ -59,17 +59,17 @@ public class HomePageTest extends BaseTest
 		assertEquals(homePageTitle, expectedTitle);
 	}
 	
-	@Test(priority = 0)
-	public void validateSearchBox() {
-
-		String expectedSearchResult = "Search Results for \"wilson pro staff\"";						
-		homePage.SearchFor("wilson pro staff");
-		homePage.ClickOnSearchButton();	
-		String actualSearchResult = homePage.ValidateSearchPerformedAsExpected();
-		
-		assertEquals(actualSearchResult, expectedSearchResult);		
-	}
-	
+//	@Test(priority = 0)
+//	public void validateSearchBox() {
+//
+//		String expectedSearchResult = "Search Results for \"wilson pro staff\"";						
+//		homePage.SearchFor("wilson pro staff");
+//		homePage.ClickOnSearchButton();	
+//		String actualSearchResult = homePage.ValidateSearchPerformedAsExpected();
+//		
+//		assertEquals(actualSearchResult, expectedSearchResult);		
+//	}
+//	
 	
 	@Test(dataProvider = "Men-Shoes-Brand", dataProviderClass = ShoesDataProvider.class,
 			priority = 0)
